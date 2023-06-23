@@ -1,0 +1,36 @@
+Capstone:
+    ☐ Frontend (react/angular)
+    User:
+        Register
+        Login
+        Logout
+        Change password
+        Basic info
+        Order history
+        Track order status
+    Seller:
+        Product management
+        Orders
+        Rating & Reviews
+        Track order
+    Admin: 
+        Products
+        Categories
+        Orders
+        Users
+        Sellers
+    Product:
+        Listing
+        Search
+        Filters
+        Categories
+        Add to cart
+        In stock
+    Shopping cart:
+        List products
+        Add product
+        Remove product
+        Checkout
+    
+
+
