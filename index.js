@@ -3,6 +3,7 @@ const app = express()
 
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
+const categoryRoutes = require('./routes/categories')
 
 dotenv.config()
 
@@ -13,9 +14,13 @@ mongoose
     })
     .catch(error => {console.log('DB not connected '+ error)})
 
-    app.get('/', (req, res) => {
+app.use(express.json());
+
+app.get('/api', (req, res) => {
     res.send('hello there')
 })
+
+app.use('/api/categories', categoryRoutes)
 
 app.listen(3000, () => {
     console.log('Server is running...')
