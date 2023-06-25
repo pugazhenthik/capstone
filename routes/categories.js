@@ -1,35 +1,35 @@
 const router = require('express').Router();
 const Category = require('../models/Category');
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    const categories = Category.find();
-    !categories && res.status(404).json({ status: 404, message: 'Category not found!' });
+    const categories = await Category.find({});
+    
+    if (categories) {
+      res.status(200).json({ data: categories });
+    }
+    
+    res.status(404).json({ message: 'Category not found!' });
 
-    res.status(200).json({ status: 200, categories: categories });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json('Server error');
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
 router.post('/', async (req, res) => {
   try {
-    const category = await new Category({
+    const category = new Category({
       name: req.body.name,
       description: req.body.description,
     })
+
     await category.save();
 
-    res.status(200).json({
-      status: 200,
-      category: category,
-    });
-  } catch(err) {
-    res.status(500).json({
-      status: 500,
-      message: "Internal server error, user not registered",
-    });
+    res.status(200).json({ data: category });
+  } catch(error) {
+    console.log(error)
+    res.status(500).json({ error: 'Server error' });
   }
 })
 
@@ -41,50 +41,42 @@ router.put('/:id', async (req, res) => {
       $set: req.body,
     });
 
-    res.status(200).json({
-      status: 200,
-      message: 'Category updated successfully',
-      category: category,
-    });
-  } catch (err) {
-    console.log(err);
+    res.status(200).json({ message: 'Category updated successfully', data: category });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
 router.get('/:id', async (req, res) => {
   try {
     const category = await Category.findById(req.params.id);
-    const { password, updatedAt, ...other } = category._doc;
-    !category &&
-      res.status(404).json({
-        status: 404,
-        error: 'Category not found!',
-      });
 
-    res.status(200).json({
-      status: 200,
-      category: other,
-    });
-  } catch (err) {
-    console.log(err);
+    if (category) {
+      res.status(200).json({ data: category });
+    }
+    res.status(404).json({ error: 'Category not found!' });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
 router.delete('/:id', async (req, res) => {
   try {
     const category = await Category.findByIdAndDelete(req.params.id);
-    !category &&
-      res.status(404).json({
-        status: 404,
-        error: 'Category not found!',
-      });
 
-    res.status(200).json({
-      status: 200,
-      message: 'Category deleted successfully',
-    });
-  } catch (err) {
-    console.log(err);
+    if (category) {
+      res.status(200).json({ message: 'Category deleted successfully' });
+    }
+    
+    res.status(404).json({ error: 'Category not found!'});
+
+    
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
