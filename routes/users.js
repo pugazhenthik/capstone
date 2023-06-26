@@ -4,25 +4,26 @@ const User = require("../models/User");
 router.get("/", async (req, res) => {
   try {
     const queries = {};
+    const search = req.query.search;
 
-    if (req.query.search) {
+    if (search) {
       queries.$or = [
-        { first_name: { $regex: "(?i)" + req.query.search } },
-        { last_name: { $regex: "(?i)" + req.query.search } },
-        { email: { $regex: "(?i)" + req.query.search } },
+        { first_name: { $regex: "(?i)" + search } },
+        { last_name: { $regex: "(?i)" + search } },
+        { email: { $regex: "(?i)" + search } },
       ];
     }
 
     const users = await User.find(queries);
 
     if (!users) {
-      return res.status(404).json({ message: "User not found!" });
+      return res.status(200).json({ message: "No users." });
     }
 
     res.status(200).json({ data: users });
   } catch (err) {
     console.log(err);
-    res.status(500).json("Server error");
+    res.status(500).json("Server error.");
   }
 });
 
@@ -35,7 +36,7 @@ router.put("/:id", async (req, res) => {
     });
 
     res.status(200).json({
-      message: "User updated successfully",
+      message: "User updated successfully.",
       data: user,
     });
   } catch (err) {
@@ -49,7 +50,7 @@ router.get("/:id", async (req, res) => {
     const { password, updatedAt, ...other } = user._doc;
 
     if (!user) {
-      res.status(404).json({ error: "User not found!" });
+      res.status(404).json({ error: "User not found!." });
     }
 
     res.status(200).json({ data: other });
@@ -62,10 +63,10 @@ router.delete("/:id", async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
     if (!user) {
-      res.status(404).json({ error: "User not found!" });
+      res.status(404).json({ error: "User not found!." });
     }
 
-    res.status(200).json({ message: "User deleted successfully" });
+    res.status(200).json({ message: "User deleted successfully." });
   } catch (err) {
     console.log(err);
   }

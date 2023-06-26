@@ -13,7 +13,7 @@ router.get("/:id", async (req, res) => {
     res.status(200).json({ data: orders });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error." });
   }
 });
 
@@ -22,13 +22,13 @@ router.get("/:id/track", async (req, res) => {
     const order = await Order.findById(req.params.id).select(["status", "_id"]);
 
     if (!order) {
-      return res.status(404).json({ error: "Order not found" });
+      return res.status(404).json({ error: "Order not found!." });
     }
 
     res.status(200).json({ data: order });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error." });
   }
 });
 
@@ -46,7 +46,7 @@ router.put("/:id", async (req, res) => {
     res.status(200).json({ data: order });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error." });
   }
 });
 

@@ -6,24 +6,24 @@ const User = require("../models/User");
 router.get("/", async (req, res) => {
   try {
     const queries = {};
-
-    if (req.query.search) {
+    const search = req.query.search;
+    if (search) {
       queries.$or = [
-        { title: { $regex: "(?i)" + req.query.search } },
-        { description: { $regex: "(?i)" + req.query.search } },
+        { title: { $regex: "(?i)" + search } },
+        { description: { $regex: "(?i)" + search } },
       ];
     }
 
     const products = await Product.find(queries);
 
     if (!products) {
-      res.status(404).json({ message: "Product not found!" });
+      res.status(200).json({ message: "No products." });
     }
 
     res.status(200).json({ data: products });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error." });
   }
 });
 
@@ -31,12 +31,12 @@ router.post("/", async (req, res) => {
   try {
     const user = await User.findById(req.body.user);
     if (!user) {
-      return res.status(404).json({ error: "User not found." });
+      return res.status(404).json({ error: "User not found!." });
     }
 
     const category = await Category.findById(req.body.category);
     if (!category) {
-      return res.status(404).json({ error: "Category not found." });
+      return res.status(404).json({ error: "Category not found!." });
     }
 
     const product = new Product({
@@ -55,7 +55,7 @@ router.post("/", async (req, res) => {
     res.status(200).json({ data: product });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error." });
   }
 });
 
@@ -69,10 +69,10 @@ router.put("/:id", async (req, res) => {
 
     res
       .status(200)
-      .json({ message: "Product updated successfully", data: product });
+      .json({ message: "Product updated successfully.", data: product });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error." });
   }
 });
 
@@ -81,13 +81,13 @@ router.get("/:id", async (req, res) => {
     const product = await Product.findById(req.params.id);
 
     if (!product) {
-      res.status(404).json({ error: "Product not found!" });
+      res.status(404).json({ error: "Product not found!." });
     }
 
     res.status(200).json({ data: product });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error." });
   }
 });
 
@@ -96,13 +96,13 @@ router.delete("/:id", async (req, res) => {
     const product = await Product.findByIdAndDelete(req.params.id);
 
     if (!product) {
-      res.status(404).json({ error: "Product not found!" });
+      res.status(404).json({ error: "Product not found!." });
     }
 
-    res.status(200).json({ message: "Product deleted successfully" });
+    res.status(200).json({ message: "Product deleted successfully." });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error." });
   }
 });
 

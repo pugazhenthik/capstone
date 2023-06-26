@@ -25,10 +25,10 @@ router.post("/register", async (req, res) => {
 
     const isUniqueEmail = await User.findOne({
       email: req.body.email,
-    }).select(["_id"]);
+    }).select(["id"]);
 
     if (isUniqueEmail) {
-      return res.status(422).json({ error: "Email already exist!" });
+      return res.status(422).json({ error: "Email already exist." });
     }
 
     const salt = await bcrypt.genSalt(10);
