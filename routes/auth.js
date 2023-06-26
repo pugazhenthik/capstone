@@ -4,12 +4,31 @@ const User = require("../models/User");
 
 router.post("/register", async (req, res) => {
   try {
+    if (!req.body.first_name) {
+      return res.status(422).json({ error: "First name is required." });
+    }
+    if (!req.body.last_name) {
+      return res.status(422).json({ error: "Last name is required." });
+    }
+
+    if (!req.body.email) {
+      return res.status(422).json({ error: "Email is required." });
+    }
+
+    if (!req.body.password) {
+      return res.status(422).json({ error: "Password is required." });
+    }
+
+    if (!["admin", "seller", "user"].includes(req.body.role)) {
+      return res.status(422).json({ error: "Invalid role." });
+    }
+
     const isUniqueEmail = await User.findOne({
       email: req.body.email,
-    });
+    }).select(["_id"]);
 
     if (isUniqueEmail) {
-      return res.status(400).json({ error: "Email already exist!" });
+      return res.status(422).json({ error: "Email already exist!" });
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -45,7 +64,9 @@ router.post("/login", async (req, res) => {
     });
 
     if (!user) {
-      return res.status(400).json({ error: "User not found!" });
+      return res
+        .status(422)
+        .json({ error: "Account does not exist with this email address." });
     }
 
     const validPassword = await bcrypt.compare(
@@ -54,7 +75,7 @@ router.post("/login", async (req, res) => {
     );
 
     if (!validPassword) {
-      return res.status(400).json({ error: "Invalid password!" });
+      return res.status(422).json({ error: "Your password is incorrect." });
     }
 
     const { password, updatedAt, ...other } = user._doc;
