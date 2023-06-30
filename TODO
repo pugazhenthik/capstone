@@ -1,36 +1,36 @@
 Capstone:
     ☐ Frontend (react/angular)
     User:
-        ☐ Register
-        ☐ Login
+        ✔ Register @done(23-06-30 09:48)
+        ✔ Login @done(23-06-30 09:48)
         ☐ Logout
         ☐ Change password
-        ☐ Basic info
-        ☐ Order history
-        ☐ Track order status
+        ✔ Basic info @done(23-06-30 09:48)
+        ✔ Order history @done(23-06-30 09:48)
+        ✔ Track order status @done(23-06-30 09:48)
     Seller:
-        ☐ Product management
-        ☐ Orders
-        ☐ Rating & Reviews
-        ☐ Track order
+        ✔ Product management @done(23-06-30 09:48)
+        ✔ Orders @done(23-06-30 09:48)
+        ✔ Rating & Reviews @done(23-06-30 09:48)
+        ✔ Track order @done(23-06-30 09:48)
     Admin: 
-        ☐ Products
-        ☐ Categories
-        ☐ Orders
-        ☐ Users
-        ☐ Sellers
+        ✔ Products @done(23-06-30 09:48)
+        ✔ Categories @done(23-06-30 09:48)
+        ✔ Orders @done(23-06-30 09:48)
+        ✔ Users @done(23-06-30 09:48)
+        ✔ Sellers @done(23-06-30 09:49)
     Product:
-        ☐ Listing
-        ☐ Search
+        ✔ Listing @done(23-06-30 09:49)
+        ✔ Search @done(23-06-30 09:49)
         ☐ Filters
         ☐ Categories
-        ☐ Add to cart
+        ✔ Add to cart @done(23-06-30 09:49)
         ☐ In stock
     Shopping cart:
-        ☐ List products
-        ☐ Add product
-        ☐ Remove product
-        ☐ Checkout
+        ✔ List products @done(23-06-30 09:49)
+        ✔ Add product @done(23-06-30 09:49)
+        ✔ Remove product @done(23-06-30 09:49)
+        ✔ Checkout @done(23-06-30 09:49)
     
 
 
