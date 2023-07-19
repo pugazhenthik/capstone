@@ -1,18 +1,20 @@
 const express = require("express");
 const app = express();
-
 const dotenv = require("dotenv");
+// const cors = require("cors");
 const mongoose = require("mongoose");
+
 const authRoutes = require("./routes/auth");
-const userRoutes = require("./routes/users");
+const userRoutes = require("./routes/user.routes");
 const sellerReviewRoutes = require("./routes/sellerReviews");
-const categoryRoutes = require("./routes/categories");
-const productRoutes = require("./routes/products");
-const productReviewRoutes = require("./routes/productReviews");
-const cartRoutes = require("./routes/cart");
-const orderRoutes = require("./routes/orders");
+const categoryRoutes = require("./routes/category.routes");
+const productRoutes = require("./routes/product.routes");
+const productReviewRoutes = require("./routes/productReview.routes");
+const cartRoutes = require("./routes/cart.routes");
+const orderRoutes = require("./routes/order.routes");
 
 dotenv.config();
+// app.use(cors(corsOptions));
 
 mongoose
   .connect(process.env.MONGO_URL)
@@ -29,7 +31,7 @@ app.get("/api", (req, res) => {
   res.send("hello there");
 });
 
-app.use("/api/auth", authRoutes);
+app.use("/api/login", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/sellers/reviews", sellerReviewRoutes);
 app.use("/api/categories", categoryRoutes);
