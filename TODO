@@ -1,7 +1,7 @@
 Capstone:
-    ☐ Middleware
-    ☐ Error handling
-    ☐ Authentication
+    ✔ Middleware @done(23-07-20 11:35)
+    ✔ Error handling @done(23-07-20 11:35)
+    ✔ Authentication @done(23-07-20 11:35)
     ☐ Frontend (react/angular)
     User:
         ✔ Register @done(23-06-30 09:48)
