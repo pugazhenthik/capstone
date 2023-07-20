@@ -16,7 +16,6 @@ npm start
     GET Get Users
     PUT Update User
     DEL Delete User
-    GET My Orders
 
 ### Categories
     POST Add Category
@@ -39,22 +38,20 @@ npm start
     GET Get Cart Items
 
 ### Orders
+    GET Orders
     GET Track Order
-    PUT Update Order
-    Seller Reviews
-    POST Add Review
-    GET Get Reviews
-    PUT Update Review
-    DEL Delete Review
+    PUT Update Order status
 
 ### Seller Reviews 
-    POST Add Review
     GET Get Reviews
+    POST Add Review
+    GET Get Review
     PUT Update Review
     DEL Delete Review
 
 ### Product Reviews 
-    POST Add Review
     GET Get Reviews
+    POST Add Review
+    GET Get Review
     PUT Update Review
     DEL Delete Review
